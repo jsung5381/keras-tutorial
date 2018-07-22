@@ -1,3 +1,7 @@
+# dirs
 kerasenv/
+
+# files
 .DS_Store
 .ipynb*
+

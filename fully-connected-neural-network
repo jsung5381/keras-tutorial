@@ -1,0 +1,276 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Fully Connected Neural Network"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "Using TensorFlow backend.\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "from keras.models import Sequential\n",
+    "from keras.layers import Dense\n",
+    "\n",
+    "# Fix random.seed\n",
+    "np.random.seed(5)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Load dataset\n",
+    "dataset = np.loadtxt('./data/pima-indians-diabetes.csv', delimiter=',')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Divide dataset\n",
+    "\n",
+    "# X\n",
+    "x_train = dataset[:700, :-1]\n",
+    "x_test = dataset[700:, :-1]\n",
+    "\n",
+    "# Y\n",
+    "y_train = dataset[:700, -1]\n",
+    "y_test = dataset[700:, -1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Define a model\n",
+    "model = Sequential()\n",
+    "\n",
+    "model.add(Dense(units=12, activation='relu', input_dim=8))\n",
+    "model.add(Dense(units=8, activation='relu'))\n",
+    "model.add(Dense(units=1, activation='sigmoid'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/svg+xml": [
+       "<svg height=\"294pt\" viewBox=\"0.00 0.00 199.00 294.00\" width=\"199pt\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n",
+       "<g class=\"graph\" id=\"graph0\" transform=\"scale(1 1) rotate(0) translate(4 290)\">\n",
+       "<title>G</title>\n",
+       "<polygon fill=\"#ffffff\" points=\"-4,4 -4,-290 195,-290 195,4 -4,4\" stroke=\"transparent\"/>\n",
+       "<!-- 4452600968 -->\n",
+       "<g class=\"node\" id=\"node1\">\n",
+       "<title>4452600968</title>\n",
+       "<polygon fill=\"none\" points=\"0,-166.5 0,-212.5 191,-212.5 191,-166.5 0,-166.5\" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"41.5\" y=\"-185.8\">dense_1: Dense</text>\n",
+       "<polyline fill=\"none\" points=\"83,-166.5 83,-212.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"106\" y=\"-197.3\">input:</text>\n",
+       "<polyline fill=\"none\" points=\"83,-189.5 129,-189.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"106\" y=\"-174.3\">output:</text>\n",
+       "<polyline fill=\"none\" points=\"129,-166.5 129,-212.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"160\" y=\"-197.3\">(None, 8)</text>\n",
+       "<polyline fill=\"none\" points=\"129,-189.5 191,-189.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"160\" y=\"-174.3\">(None, 12)</text>\n",
+       "</g>\n",
+       "<!-- 4710436256 -->\n",
+       "<g class=\"node\" id=\"node2\">\n",
+       "<title>4710436256</title>\n",
+       "<polygon fill=\"none\" points=\"0,-83.5 0,-129.5 191,-129.5 191,-83.5 0,-83.5\" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"41.5\" y=\"-102.8\">dense_2: Dense</text>\n",
+       "<polyline fill=\"none\" points=\"83,-83.5 83,-129.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"106\" y=\"-114.3\">input:</text>\n",
+       "<polyline fill=\"none\" points=\"83,-106.5 129,-106.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"106\" y=\"-91.3\">output:</text>\n",
+       "<polyline fill=\"none\" points=\"129,-83.5 129,-129.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"160\" y=\"-114.3\">(None, 12)</text>\n",
+       "<polyline fill=\"none\" points=\"129,-106.5 191,-106.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"160\" y=\"-91.3\">(None, 8)</text>\n",
+       "</g>\n",
+       "<!-- 4452600968&#45;&gt;4710436256 -->\n",
+       "<g class=\"edge\" id=\"edge2\">\n",
+       "<title>4452600968-&gt;4710436256</title>\n",
+       "<path d=\"M95.5,-166.3799C95.5,-158.1745 95.5,-148.7679 95.5,-139.8786\" fill=\"none\" stroke=\"#000000\"/>\n",
+       "<polygon fill=\"#000000\" points=\"99.0001,-139.784 95.5,-129.784 92.0001,-139.784 99.0001,-139.784\" stroke=\"#000000\"/>\n",
+       "</g>\n",
+       "<!-- 4710269056 -->\n",
+       "<g class=\"node\" id=\"node3\">\n",
+       "<title>4710269056</title>\n",
+       "<polygon fill=\"none\" points=\"2.5,-.5 2.5,-46.5 188.5,-46.5 188.5,-.5 2.5,-.5\" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"44\" y=\"-19.8\">dense_3: Dense</text>\n",
+       "<polyline fill=\"none\" points=\"85.5,-.5 85.5,-46.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"108.5\" y=\"-31.3\">input:</text>\n",
+       "<polyline fill=\"none\" points=\"85.5,-23.5 131.5,-23.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"108.5\" y=\"-8.3\">output:</text>\n",
+       "<polyline fill=\"none\" points=\"131.5,-.5 131.5,-46.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"160\" y=\"-31.3\">(None, 8)</text>\n",
+       "<polyline fill=\"none\" points=\"131.5,-23.5 188.5,-23.5 \" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"160\" y=\"-8.3\">(None, 1)</text>\n",
+       "</g>\n",
+       "<!-- 4710436256&#45;&gt;4710269056 -->\n",
+       "<g class=\"edge\" id=\"edge3\">\n",
+       "<title>4710436256-&gt;4710269056</title>\n",
+       "<path d=\"M95.5,-83.3799C95.5,-75.1745 95.5,-65.7679 95.5,-56.8786\" fill=\"none\" stroke=\"#000000\"/>\n",
+       "<polygon fill=\"#000000\" points=\"99.0001,-56.784 95.5,-46.784 92.0001,-56.784 99.0001,-56.784\" stroke=\"#000000\"/>\n",
+       "</g>\n",
+       "<!-- 4710436592 -->\n",
+       "<g class=\"node\" id=\"node4\">\n",
+       "<title>4710436592</title>\n",
+       "<polygon fill=\"none\" points=\"61,-249.5 61,-285.5 130,-285.5 130,-249.5 61,-249.5\" stroke=\"#000000\"/>\n",
+       "<text fill=\"#000000\" font-family=\"Times,serif\" font-size=\"14.00\" text-anchor=\"middle\" x=\"95.5\" y=\"-263.8\">4710436592</text>\n",
+       "</g>\n",
+       "<!-- 4710436592&#45;&gt;4452600968 -->\n",
+       "<g class=\"edge\" id=\"edge1\">\n",
+       "<title>4710436592-&gt;4452600968</title>\n",
+       "<path d=\"M95.5,-249.4092C95.5,-241.4308 95.5,-231.795 95.5,-222.606\" fill=\"none\" stroke=\"#000000\"/>\n",
+       "<polygon fill=\"#000000\" points=\"99.0001,-222.5333 95.5,-212.5333 92.0001,-222.5334 99.0001,-222.5333\" stroke=\"#000000\"/>\n",
+       "</g>\n",
+       "</g>\n",
+       "</svg>"
+      ],
+      "text/plain": [
+       "<IPython.core.display.SVG object>"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "from IPython.display import SVG\n",
+    "from keras.utils.vis_utils import model_to_dot\n",
+    "\n",
+    "%matplotlib inline\n",
+    "\n",
+    "# Display the model\n",
+    "SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Configure training phase of the model\n",
+    "\n",
+    "# loss: used to evaluate current weight set, since our problem is binary problem, set this to binary_crossentropy\n",
+    "# optimizer: an optimization algorithm to find optimal weight using gradient descent algorithm\n",
+    "model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 1/5\n",
+      "700/700 [==============================] - 1s 831us/step - loss: 4.3522 - acc: 0.6543\n",
+      "Epoch 2/5\n",
+      "700/700 [==============================] - 0s 31us/step - loss: 3.6554 - acc: 0.6429\n",
+      "Epoch 3/5\n",
+      "700/700 [==============================] - 0s 26us/step - loss: 3.4546 - acc: 0.6129\n",
+      "Epoch 4/5\n",
+      "700/700 [==============================] - 0s 33us/step - loss: 3.0968 - acc: 0.6300\n",
+      "Epoch 5/5\n",
+      "700/700 [==============================] - 0s 31us/step - loss: 2.6359 - acc: 0.6643\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "<keras.callbacks.History at 0x119b56cf8>"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Train the model\n",
+    "model.fit(x_train, y_train, epochs=5, batch_size=64)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "68/68 [==============================] - 0s 993us/step\n",
+      "acc: 73.53%\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Evaluate the model\n",
+    "loss_and_metrics = model.evaluate(x_test, y_test)\n",
+    "\n",
+    "# Print result\n",
+    "print('%s: %.2f%%' % (model.metrics_names[1], loss_and_metrics[1]*100))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
